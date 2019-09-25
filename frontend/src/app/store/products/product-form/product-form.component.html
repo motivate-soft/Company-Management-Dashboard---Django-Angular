@@ -1,0 +1,109 @@
+<div class="modal-header">
+  {{product.id ? 'Update Product': 'Create a new Product'}}
+</div>
+<div class="modal-body">
+  <form [formGroup]="registerForm">
+    <div class="form-row">
+      <div class="card-body col-4" style="padding-left: 50px">
+        <label class="form-label" style="padding-left: 8px">Upload new photo</label>
+        <div class="dropzone avatar" [dropzone]="dropzoneConfig" (removedFile)="remove($event)"
+             (success)="onUploadSuccess($event)">
+          <div class="dz-message">
+          </div>
+          <div class="fallback">
+            <input formControlName="file" type="file">
+          </div>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="form-group">
+          <label class="form-label">Product Name</label>
+          <input type="text" #name class="form-control" [(ngModel)]="product.name" formControlName="name"
+                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+          <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+            <div *ngIf="f.name.errors.required">Product Name is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea type="text" #description class="form-control" [(ngModel)]="product.description"
+                    formControlName="description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+                    rows="4"></textarea>
+          <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+            <div *ngIf="f.description.errors.required">Product Description is required</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label class="form-label">Sku</label>
+        <input type="text" #product_sku class="form-control" [(ngModel)]="product.sku" formControlName="product_sku"
+               [ngClass]="{ 'is-invalid': submitted && f.product_sku.errors }">
+        <div *ngIf="submitted && f.product_sku.errors" class="invalid-feedback">
+          <div *ngIf="f.product_sku.errors.required">Product Sku is required</div>
+        </div>
+      </div>
+      <div class="form-group col-6">
+        <label class="form-label">Price</label>
+        <input type="text" #product_price class="form-control" [(ngModel)]="product.price"
+               formControlName="product_price" [ngClass]="{ 'is-invalid': submitted && f.product_price.errors }">
+        <div *ngIf="submitted && f.product_price.errors" class="invalid-feedback">
+          <div *ngIf="f.product_price.errors.required">Product Price is required</div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="variation form-row col-12" *ngIf="!product.id">
+    <label class="form-label col-3">Option name</label>
+    <label class="form-label col-9">Option value</label>
+    <div class="col-12 row" *ngFor="let variation of variations; let i = index">
+      <div class="form-group col-3">
+        <input type="text" name="option_name{{variation_index}}" class="form-control" [(ngModel)]="variation.name">
+      </div>
+      <tag-input class="ngx-chips-success col-8" name="option_value{{variation_index}}"
+                 (ngModelChange)="updateVariation()" [(ngModel)]="variation.value"></tag-input>
+      <div class="form-group col-1">
+        <button class="btn btn-default" (click)="deleteVariation(i)"><i class="ion ion-ios-trash"
+                                                                        style="font-size: 20px"></i></button>
+      </div>
+    </div>
+    <button type="button" class="btn btn-default" (click)="addVariation()">Add another option</button>
+  </div>
+  <br>
+
+  <label class="form-label">Modify the variants to be created:</label>
+  <div class="form-row">
+    <div class="col-12" *ngIf="product.variations && product.variations.length!=0">
+      <label class="form-label col-2">Variant</label>
+      <label class="form-label col-3">Price</label>
+      <label class="form-label col-2">Sku</label>
+      <label class="form-label col-3">Barcode</label>
+      <label class="form-label col-2">Inventory</label>
+    </div>
+    <div class="col-12 row" *ngFor="let variation of product.variations">
+      <div class="sidenav-divider" style="color: #eee; margin-bottom: 20px "></div>
+      <div class="col-2"><p style="word-break: break-all">{{variation.title}}</p></div>
+      <div class="form-group col-3">
+        <input type="text" name="price" class="form-control" [(ngModel)]="variation.price">
+      </div>
+      <div class="form-group col-2">
+        <input type="text" name="sku" class="form-control" [(ngModel)]="variation.sku">
+      </div>
+      <div class="form-group col-3">
+        <input type="text" name="barcode" class="form-control" [(ngModel)]="variation.barcode">
+      </div>
+      <div class="form-group col-2">
+        <input type="text" name="inventory" class="form-control" [(ngModel)]="variation.inventory">
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col">
+      <button type="button" class="btn btn-primary" style="float: right; margin-left: 5px" (click)="submit()">Save
+      </button>
+      <button type="button" class="btn btn-default" style="float: right" (click)="close()">Close</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<!-- `.clients-wrapper` fills all available space of container -->
+<div class="clients-wrapper" [ngClass]="{'clients-sidebox-open': sideboxOpened}">
+
+  <!-- `.clients-content` fills all available space of `clients-wrapper` -->
+  <div class="clients-content clients-scroll container-p-x container-p-y">
+
+    <!-- Header -->
+    <h4 class="d-flex flex-wrap justify-content-between align-items-center font-weight-bold pt-2 mb-2">
+      <div class="mb-2">Clients</div>
+      <div class="mb-2" style="max-width: 200px;">
+        <input type="text" class="form-control" placeholder="Search">
+      </div>
+    </h4>
+    <div class="w-100 text-right mb-2">
+      <button type="button" class="btn btn-round btn-primary"
+              (click)="open(createModal, { windowClass: 'modal-default modal-lg animate' })">
+        <i class="ion ion-md-add"></i>&nbsp;Add Customer
+      </button>
+    </div>
+    <!-- / Header -->
+    <!-- Clients list -->
+    <div class="table-responsive ui-bordered">
+      <table class="clients-table table table-hover m-0">
+        <tbody>
+        <tr *ngFor="let customer of customers" [ngClass]="{'bg-light': selected === customer && sideboxOpened}"
+            (click)="selectClient(customer)">
+          <td class="align-middle py-3">
+            <div class="media align-items-center">
+              <img [src]="customer.image ? 'statics/image/' + customer.image : 'assets/img/avatars/avatar_placeholder.png'"
+                   class="d-block thumb-custom rounded-circle" alt="">
+              <div class="media-body flex-basis-auto pl-3">
+                <div>{{customer.first_name}}&nbsp;{{customer.last_name}}</div>
+                <div class="text-muted small">{{customer.country}}</div>
+              </div>
+            </div>
+          </td>
+          <td class="align-middle py-3">
+            {{customer.city}}
+          </td>
+          <td class="align-middle py-3">
+            <div>{{customer.email}}</div>
+            <div *ngIf="customer.phone">{{customer.phone}}</div>
+          </td>
+          <td class="align-middle py-3">
+            <span class="badge badge-success">3 Orders</span>
+          </td>
+          <td class="align-middle text-right">
+            <button type="button" class="btn btn-info mr-1 btn-xs icon-btn md-btn-flat"
+                    (click)="edit(createModal, customer, { windowClass: 'modal-default modal-lg animate' })" ngbTooltip="Edit">
+              <span class="ion ion-md-create"></span>
+            </button>
+            <button type="button" class="btn btn-danger btn-danger btn-xs icon-btn md-btn-flat" (click)="delete(customer.id)" ngbTooltip="Delete">
+              <span class="ion ion-md-trash"></span>
+            </button>
+          </td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <!-- / Clients list -->
+  </div><!-- / .clients-content -->
+</div>
+<!-- / Clients wrapper -->
+
+<!-- Modal template -->
+<ng-template #createModal let-c="close" let-d="dismiss">
+  <app-customer-form
+    [customer]="customer"
+    (closeForm)="close(c)"
+    (updateForm)="updateCustomer($event, c)"
+    (createForm)="createCustomer($event, c)"
+  >
+  </app-customer-form>
+</ng-template>

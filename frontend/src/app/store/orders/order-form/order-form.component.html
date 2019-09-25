@@ -1,0 +1,110 @@
+<div class="row">
+  <div class="col-xl-8 col-lg-8 mb-3">
+    <div class="card pb-4">
+
+      <div class="card-header">
+        <label class="font-bold" style="font-size: 16px; font-weight: bold">Order details</label>
+        <app-search-product
+          (select)="selectProduct($event)"
+        ></app-search-product>
+      </div>
+      <div class="card-body products-container">
+        <!-- Product row -->
+        <div class="product-row py-2" *ngFor="let variation of addedProducts">
+          <div class="media align-items-center product-image">
+            <img class="d-block ui-w-40 img-thumbnail img-responsive"
+                 [src]="(variation.product.image ? 'statics/image/' + variation.product.image : 'assets/img/avatars/noimage.png')"
+                 alt="">
+            <!-- Generate link to product here -->
+            <a href="javascript:void(0)" class="media-body d-block ml-3">
+              {{variation.product.name}}
+            </a>
+          </div>
+          <div class="product-price-container align-items-center px-3">
+            <div class="product-price text-right">
+              {{variation.price}}dh
+            </div>
+            <div class="price-multiple mx-2"><i class="ion ion-ios-close"></i></div>
+            <div class="price-amount">
+              <input type="number" min="1" step="1" [(ngModel)]="variation.amount" class="form-control pl-2">
+            </div>
+          </div>
+          <div class="product-item-total align-items-center px-2">
+            {{variation.amount * variation.price}}dh
+          </div>
+          <div class="price-row-remove align-items-center" title="Remove item" (click)="removeProduct(variation.id)">
+            <i class="ion ion-md-close" style="font-size: 17px"></i>
+          </div>
+        </div>
+        <!-- / Product row -->
+        <!-- Add a note -->
+        <div class="row mt-5">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="add-notes">Notes</label>
+              <input type="text" id="add-notes" placeholder="Add a note..." class="form-control">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="detail-container w-100 mb-2">
+              <div class="detail-label text-muted">
+                Subtotal
+              </div>
+              <div class="detail-amount">
+                {{calcTotal()[0]}}dh
+              </div>
+            </div>
+            <div class="detail-container w-100 mb-2">
+              <div class="detail-label">
+                <label class="font-bold" style="font-weight: bold;">Total</label>
+              </div>
+              <div class="detail-amount">
+                <label class="font-bold" style="font-weight: bold;">
+                  {{calcTotal()[1]}}dh
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- / Add a note -->
+      </div>
+      <div class="col-md-12">
+        <button class="btn btn-primary d-block float-right" [disabled]="!order.customer && !order.products" (click)="submit()">
+          <span class="ion ion-md-save"></span>&nbsp;
+          Save
+        </button>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-xl-4 col-lg-4 mb-3">
+    <div class="card w-100">
+      <div class="card-header">
+        <label class="font-bold" style="font-size: 16px; font-weight: bold">
+          Find or create a customer
+        </label>
+          <div class="card-body demo-vertical-spacing">
+          <app-search-customer
+            [selectedCustomerID]="order.customer"
+            (select)="selectCustomer($event)"
+          ></app-search-customer>
+        </div>
+      </div>
+      <div class="card-body">
+      </div>
+    </div>
+    <div class="card w-100 mt-3">
+      <div class="card-header">
+        <label class="font-bold" style="font-size: 16px; font-weight: bold">
+          Tags
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <input type="text" class="form-control w-100" placeholder="Urgent, reviewed, wholesale">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

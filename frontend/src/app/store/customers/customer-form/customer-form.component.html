@@ -1,0 +1,142 @@
+<form [formGroup]="registerForm">
+  <div class="modal-header">
+    {{customer.id ? 'Update customer' : 'Create a new customer'}}
+  </div>
+  <div class="modal-body">
+
+    <!--<div class="form-row">-->
+    <!--<input type="file" (change)="fileChangeEvent($event)" />-->
+    <!--<image-cropper-->
+    <!--[imageChangedEvent]="imageChangedEvent"-->
+    <!--[maintainAspectRatio]="true"-->
+    <!--[aspectRatio]="4 / 3"-->
+    <!--[resizeToWidth]="128"-->
+    <!--format="png"-->
+    <!--(imageCropped)="imageCropped($event)"-->
+    <!--(imageLoaded)="imageLoaded()"-->
+    <!--(loadImageFailed)="loadImageFailed()"-->
+    <!--&gt;</image-cropper>-->
+    <!--</div>-->
+    <div class="card-body" style="text-align: center">
+      <label class="form-label">Image</label>
+      <div class="dropzone avatar" [dropzone]="dropzoneConfig" (removedFile)="remove($event)"
+           (success)="onUploadSuccess($event)" style='background-image: url("assets/img/avatars/avatar_placeholder.png")'>
+        <div class="dz-message">
+        </div>
+        <div class="fallback">
+          <input name="file" type="file">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label class="form-label">First mame</label>
+        <input type="text" #first_name class="form-control" [(ngModel)]="customer.first_name"
+               formControlName="first_name" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }">
+        <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+          <div *ngIf="f.first_name.errors.required">First Name is required</div>
+        </div>
+      </div>
+      <div class="form-group col-6">
+        <label class="form-label">Last name</label>
+        <input type="text" #last_name class="form-control" [(ngModel)]="customer.last_name" formControlName="last_name"
+               [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }">
+        <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+          <div *ngIf="f.last_name.errors.required">Last name is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        <label class="form-label">Email</label>
+        <input type="email" #email class="form-control" formControlName="email" [(ngModel)]="customer.email"
+               [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="dropdown-divider"></div>
+    <br>
+    <label class="form-label">Shipping address</label><br><br>
+
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label class="form-label">Company</label>
+        <input type="text" #company class="form-control" [(ngModel)]="customer.company" formControlName="company"
+               [ngClass]="{ 'is-invalid': submitted && f.company.errors }">
+        <div *ngIf="submitted && f.company.errors" class="invalid-feedback">
+          <div *ngIf="f.company.errors.required">Company is required</div>
+        </div>
+      </div>
+      <div class="form-group col-6">
+        <label class="form-label">Phone number</label>
+        <input type="text" #phone class="form-control" [(ngModel)]="customer.phone" formControlName="phone"
+               [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+          <div *ngIf="f.phone.errors.required">Phone is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label class="form-label">Address</label>
+        <input type="text" #address class="form-control" [(ngModel)]="customer.address" formControlName="address"
+               [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+        <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+          <div *ngIf="f.address.errors.required">Address is required</div>
+        </div>
+      </div>
+      <div class="form-group col-6">
+        <label class="form-label">Apartment, suit, etc(option)</label>
+        <input type="text" class="form-control" formControlName="apartment" [(ngModel)]="customer.apartment">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label class="form-label">City</label>
+        <input type="text" #city class="form-control" [(ngModel)]="customer.city" formControlName="city"
+               [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+        <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+          <div *ngIf="f.city.errors.required">City is required</div>
+        </div>
+      </div>
+      <div class="form-group col-6">
+        <label class="form-label">Country</label>
+        <input type="text" #country class="form-control" [(ngModel)]="customer.country" formControlName="country"
+               [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
+        <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+          <div *ngIf="f.country.errors.required">Country is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label class="form-label">Region</label>
+        <input type="text" #region class="form-control" [(ngModel)]="customer.region" formControlName="region"
+               [ngClass]="{ 'is-invalid': submitted && f.region.errors }">
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.region.errors.required">Region is required</div>
+        </div>
+      </div>
+      <div class="form-group col-6">
+        <label class="form-label">Zip/Postal code</label>
+        <input type="text" #postal_code class="form-control" [(ngModel)]="customer.postal_code"
+               formControlName="postal_code" [ngClass]="{ 'is-invalid': submitted && f.postal_code.errors }">
+        <div *ngIf="submitted && f.postal_code.errors" class="invalid-feedback">
+          <div *ngIf="f.postal_code.errors.required">Zip/Postal code is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        <button type="button" class="btn btn-primary" style="float: right; margin-left: 5px" (click)="submit()">Save
+        </button>
+        <button type="button" class="btn btn-default" style="float: right" (click)="close()">Close</button>
+      </div>
+    </div>
+  </div>
+</form>

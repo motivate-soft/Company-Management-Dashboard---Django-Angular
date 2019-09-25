@@ -1,0 +1,158 @@
+<h4 class="font-weight-bold py-3 mb-4">
+  SETTING
+</h4>
+<div class="card overflow-hidden pb-5" style="min-height: 75%">
+  <div class="row no-gutters row-bordered row-border-light h-100">
+    <div class="col-md-3 pt-0">
+      <div class="list-group list-group-flush account-settings-links">
+        <button type="button" class="list-group-item list-group-item-action" [ngClass]="{active: curTab === 'acc_info'}"
+                (click)="curTab='acc_info'">Account information
+        </button>
+        <button type="button" class="list-group-item list-group-item-action"
+                [ngClass]="{active: curTab === 'pwd_reset'}" (click)="curTab='pwd_reset'">Password reset
+        </button>
+        <button type="button" class="list-group-item list-group-item-action"
+                [ngClass]="{active: curTab === 'recent_login_his'}" (click)="curTab='recent_login_his'">Recent login
+          history
+        </button>
+      </div>
+    </div>
+    <div class="col-md-9" *ngIf="curTab === 'acc_info'">
+      <div class="card-body media align-items-center">
+        <img [src]="'assets/img/avatars/' + userTempData.photo" alt="" class="d-block ui-w-80">
+
+        <div class="media-body ml-4">
+          <button type="button" class="btn btn-outline-primary">Upload new photo</button> &nbsp;
+          <button type="button" class="btn btn-default md-btn-flat">Reset</button>
+          <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
+        </div>
+      </div>
+      <hr class="border-light m-0">
+      <form [formGroup]="profileForm">
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label"><strong>First Name</strong></label>
+            <input [(ngModel)]="userTempData.first_name" type="text" class="form-control"
+                   #first_name formControlName="first_name"
+                   [ngClass]="{ 'is-invalid': profileFormSubmitted && pf.first_name.errors }"
+                   [readOnly]="!editable" value="{{userTempData.first_name}}">
+            <div *ngIf="profileFormSubmitted && pf.first_name.errors" class="invalid-feedback">
+              <div *ngIf="pf.first_name.errors.required">First name is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label"><strong>Last Name</strong></label>
+            <input [(ngModel)]="userTempData.last_name" type="text" class="form-control"
+                   #last_name formControlName="last_name"
+                   [ngClass]="{ 'is-invalid': profileFormSubmitted && pf.last_name.errors }"
+                   [readOnly]="!editable" value="{{userTempData.last_name}}">
+            <div *ngIf="profileFormSubmitted && pf.last_name.errors" class="invalid-feedback">
+              <div *ngIf="pf.last_name.errors.required">Last name is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label"><strong>E-mail</strong></label>
+            <input [(ngModel)]="userTempData.email" type="email" class="form-control mb-1"
+                   #email formControlName="email" [ngClass]="{ 'is-invalid': profileFormSubmitted && pf.email.errors }"
+                   [readOnly]="!editable" value="{{userTempData.email}}">
+            <div *ngIf="profileFormSubmitted && pf.email.errors" class="invalid-feedback">
+              <div *ngIf="pf.email.errors.required">Email is required</div>
+              <div *ngIf="pf.email.errors.email">Email must be a valid email address</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label"><strong>Phone</strong></label>
+            <input [(ngModel)]="userTempData.phone" type="tel" class="form-control mb-1"
+                   #phone formControlName="phone" [ngClass]="{ 'is-invalid': profileFormSubmitted && pf.phone.errors }"
+                   [readOnly]="!editable" value="{{userTempData.phone}}">
+            <div *ngIf="profileFormSubmitted && pf.phone.errors" class="invalid-feedback">
+              <div *ngIf="pf.phone.errors.required">Phone is required</div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="text-right mt-2 mr-4">
+        <button type="button" class="btn btn-primary"
+                (click)="onAccountEdit()">{{editable ? 'Save changes' : 'Edit'}}</button>&nbsp;
+        <button type="button" class="btn btn-default" (click)="onCancelAccountEdit()">Cancel</button>
+      </div>
+    </div>
+    <div class="col-md-9" *ngIf="curTab === 'pwd_reset'">
+      <form [formGroup]="passwordForm">
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label"><strong>Current Password</strong></label>
+            <input [(ngModel)]="current_password" type="password" class="form-control"
+                   [ngClass]="{ 'is-invalid': passwordFormSubmitted && cp.current_password.errors }"
+                   formControlName="current_password" value="{{current_password}}" (input)="cur_password_error=''">
+            <div *ngIf="passwordFormSubmitted && cp.current_password.errors" class="invalid-feedback">
+              <div *ngIf="cp.current_password.errors.required">Current password is required</div>
+            </div>
+            <div *ngIf="cur_password_error !== ''" class="invalid-feedback d-block">
+              <div style="font-size: 14px">{{cur_password_error}}</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label"><strong>New password</strong></label>
+            <input [(ngModel)]="new_password" type="password" class="form-control"
+                   [ngClass]="{ 'is-invalid': passwordFormSubmitted && cp.new_password.errors }"
+                   formControlName="new_password" value="{{new_password}}" (input)="new_password_error=''">
+            <div *ngIf="passwordFormSubmitted && cp.new_password.errors" class="invalid-feedback">
+              <div *ngIf="cp.new_password.errors.required">New password is required</div>
+            </div>
+            <div *ngIf="new_password_error !== ''" class="invalid-feedback d-block">
+              <div style="font-size: 14px">{{new_password_error}}</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label"><strong>Repeat new password</strong></label>
+            <input [(ngModel)]="repeat_password" type="password" class="form-control mb-1"
+                   [ngClass]="{ 'is-invalid': passwordFormSubmitted && cp.repeat_password.errors }"
+                   formControlName="repeat_password" value="{{repeat_password}}">
+            <div *ngIf="passwordFormSubmitted && cp.repeat_password.errors" class="invalid-feedback">
+              <div *ngIf="cp.repeat_password.errors">Password doesn't match</div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="text-right mt-2 mr-4">
+        <button type="button" class="btn btn-primary"
+                (click)="onSaveChangePassword()">Save changes
+        </button>&nbsp;
+        <button type="button" class="btn btn-default" (click)="onCancelChangePassword()">Cancel</button>
+      </div>
+    </div>
+    <div class="col-md-9" *ngIf="curTab === 'recent_login_his'">
+      <div class="card m-3 pb-5">
+        <div class="row m-0">
+          <div class="col-md-12 pt-3">
+            <strong>Account Login History</strong>
+          </div>
+          <hr class="w-100">
+          <div class="container m-0">
+            <div class="row-container">
+              <div class="row row-header pb-2">
+                <div class="row-num pr-5">#</div>
+                <div class="row-login-time"><strong>Login time</strong></div>
+                <div class="row-remote-address"><strong>Remote Addresse</strong></div>
+                <div class="row-browser-info"><strong>Browser Information</strong></div>
+                <div class="row-location"><strong>Location</strong></div>
+              </div>
+              <div class="row login-row py-2" *ngFor="let history of login_history">
+                <div class="row-num pr-5">{{history.id}}</div>
+                <div class="row-login-time">{{history.updated_at}}</div>
+                <div class="row-remote-address">{{history.ip_address}}</div>
+                <div class="row-browser-info">{{history.browser_info}}</div>
+                <div class="row-location">{{history.location}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

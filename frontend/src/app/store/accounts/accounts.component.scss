@@ -1,0 +1,28 @@
+.row-header, .login-row {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #eee;
+}
+.login-row:last-of-type {
+  border-bottom: 0 solid transparent;
+}
+
+.row-num {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.row-login-time, .row-remote-address {
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-flex: 1;
+}
+.row-browser-info {
+  -ms-flex: 3;
+  flex: 3;
+  -webkit-flex: 3;
+}
+.row-location {
+  -ms-flex: 0.5;
+  flex: 0.5;
+  -webkit-flex: 0.5;
+}

@@ -1,0 +1,16 @@
+<div class="verify">
+  <div class="verify__back">
+    <i class="ion ion-md-arrow-back" (click)="back()"></i>
+  </div>
+  <div class="verify__container">
+    <div>
+      <div class="card verify__container__card">
+        <div class="card-body">
+          <i class="ion ion-ios-checkmark-circle-outline"></i><br><br>
+          <p *ngIf="verify_state">Your Email is verified</p>
+          <p *ngIf="!verify_state">Thanks for using Dropify,<br>please please verify your email</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+[
+  {
+    "image": "ps4.jpg",
+    "name": "PlayStation 4 1TB (Jet Black)",
+    "id": 3455632,
+    "price": 480
+  },
+  {
+    "image": "nike-1.jpg",
+    "name": "Nike Men Black Liteforce III Sneakers",
+    "id": 3455631,
+    "price": 57.55
+  },
+  {
+    "image": "headphones.jpg",
+    "name": "Wireless headphones",
+    "id": 3455630,
+    "price": 235.55
+  },
+  {
+    "image": "backpack.jpg",
+    "name": "HERO ATHLETES BAG",
+    "id": 3455629,
+    "price": 160
+  },
+  {
+    "image": "chair-1.jpg",
+    "name": "POÄNG",
+    "id": 3455628,
+    "price": 159
+  },
+  {
+    "image": "iwatch.jpg",
+    "name": "Apple iWatch (black)",
+    "id": 3455627,
+    "price": 399
+  },
+  {
+    "image": "sunglasses.jpg",
+    "name": "WALKING 400 BLUE CAT3",
+    "id": 3455626,
+    "price": 20.55
+  },
+  {
+    "image": "adidas.jpg",
+    "name": "Adidas Sneakers Originals",
+    "id": 3455625,
+    "price": 57.55
+  }
+]

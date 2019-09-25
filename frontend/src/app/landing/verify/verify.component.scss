@@ -1,0 +1,32 @@
+.verify {
+  background: #eee;
+  padding: 30px;
+  height: 100vh;
+  &__back {
+
+    i {
+      font-weight: bold;
+      font-size: 30px;
+      color: #1ab394;
+    }
+  }
+
+  &__container {
+    padding: 20vh;
+    &__card {
+      margin: auto;
+      width: 400px;
+      height: 300px;
+      text-align: center;
+      padding: 20px;
+      font-size: 20px;
+
+      i {
+        font-weight: bold;
+        font-size: 80px;
+        color: #1ab394;
+      }
+    }
+  }
+
+}

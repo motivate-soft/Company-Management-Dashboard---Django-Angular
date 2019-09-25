@@ -1,0 +1,27 @@
+
+""" aws access info """
+AWS_ACCESS_KEY = 'AKIAJIBUYD7WJI5EJIPQ'
+AWS_SECRET_ACCESS_KEY = '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'
+BUCKET_NAME = '360degreeimage'
+AWS_BASE_URL = 'https://s3-us-west-1.amazonaws.com/360degreeimage/'
+
+""" notification types """
+NOTIFICATION_TRANSFER = 0
+NOTIFICATION_UPDATE = 1
+NOTIFICATION_ALARM = 2
+
+""" notification states """
+UNCHECKED_NOTIFICATION = 0
+CHECKED_NOTIFICATION = 1
+
+""" transfer states """
+TRANSFER_PENDING = 0
+TRANSFER_ACCEPTED = 1
+TRANSFER_REJECTED = 2
+TRANSFER_MOVED = 3
+TRANSFER_REMOVED = 4
+
+""" market state """
+OFF_MARKET = 0
+ON_MARKET = 1
+AT_AUCTION = 2

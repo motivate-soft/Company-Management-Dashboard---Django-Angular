@@ -1,0 +1,79 @@
+<div class="signup">
+  <div class="signup__back">
+    <i class="ion ion-md-arrow-back" (click)="back()"></i>
+  </div>
+  <div class="signup__container">
+    <form [formGroup]="registerForm">
+      <wizard [navBarLocation]="'top'" [navBarLayout]="'custom'">
+        <wizard-step navigationSymbol="&#62544;" navigationSymbolFontFamily="Ionicons">
+          <div class="card signup__container__card">
+            <div class="card-body">
+              <div style="text-align: -webkit-center; padding: 30px">
+                <div class="text-center">
+                  <img src="assets/img/logo.png" class="img img-responsive" style="width: 50px">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col">
+                  <label class="form-label">Your email</label>
+                  <input type="email" #email class="form-control" [(ngModel)]="store_info.email" formControlName="email"
+                         placeholder="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="form-row">
+                <div class="form-group col">
+                  <label class="form-label">Password</label>
+                  <input type="password" #password class="form-control" [(ngModel)]="store_info.password"
+                         formControlName="password" placeholder="Password"
+                         [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col">
+                  <label class="form-label">Store Name</label>
+                  <input type="text" #store class="form-control" formControlName="store" [(ngModel)]="store_info.store"
+                         placeholder="Store" [ngClass]="{ 'is-invalid': submitted && f.store.errors }">
+                  <div *ngIf="submitted && f.store.errors" class="invalid-feedback">
+                    <div *ngIf="f.store.errors.required">Store Name is required</div>
+                    <div *ngIf="f.store.errors.pattern">Invalid Store Name</div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="error['email'] !== ''" class="invalid-feedback col-md-12 mb-1 mt-1 ml-3 d-block">
+                <div style="font-size: 14px">{{error['email']}}</div>
+              </div>
+              <div *ngIf="error['password'] !== ''" class="invalid-feedback col-md-12 mb-1 mt-1 ml-3 d-block">
+                <div style="font-size: 14px">{{error['password']}}</div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col">
+                  <button type="button" class="btn btn-primary" style="width: 100%;" (click)="signup()">Sign Up
+                  </button>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col" style="text-align: center">
+                  <label class="form-label">Already have account?
+                    <a routerLink="javascript:void(0)" style="color: #7792e4" (click)="gotoLogin()">Sign in</a>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </wizard-step>
+
+      </wizard>
+    </form>
+
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="login">
+  <div class="login__back">
+    <i class="ion ion-md-arrow-back" (click)="back()"></i>
+  </div>
+  <div class="login__container">
+    <form [formGroup]="registerForm">
+      <wizard [navBarLocation]="'top'" [navBarLayout]="'custom'">
+        <wizard-step navigationSymbol="&#62544;" navigationSymbolFontFamily="Ionicons">
+          <div class="card login__container__card">
+            <div class="card-body">
+              <div style="text-align: -webkit-center; padding: 30px">
+                <div class="text-center">
+                  <img src="assets/img/logo.png" class="img img-responsive" style="width: 50px">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col">
+                  <label class="form-label">Store Name</label>
+                  <label class="form-label" style="float: right;: right;"><a style="color: #7792e4">Forgot store?</a></label>
+                  <input type="text" #store class="form-control" formControlName="store" [(ngModel)]="store_info.store" [ngClass]="{ 'is-invalid': submitted && f.store.errors }">
+                </div>
+              </div><br>
+              <div class="form-row">
+                <div class="form-group col-12">
+                  <button type="button" class="btn btn-primary" nextStep>Next</button>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col" style="text-align: center">
+                  <label class="form-label">Don't have an account yet?
+                    <a style="color: #7792e4" href="javascript: void(0)" (click)="gotoSignUp()">Sign up</a></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </wizard-step>
+        <wizard-step navigationSymbol="&#62263;" navigationSymbolFontFamily="Ionicons">
+          <div class="card login__container__card">
+            <div class="card-body">
+              <div style="text-align: -webkit-center; padding: 30px">
+                <div class="text-center">
+                  <img src="assets/img/logo.png" class="img img-responsive" style="width: 50px">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col">
+                  <label class="form-label">Your email</label>
+                  <input type="email" #email class="form-control" [(ngModel)]="store_info.email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col">
+                  <label class="form-label">Password</label>
+                  <label class="form-label" style="float: right;"><a style="color: #7792e4">Forgot password?</a></label>
+                  <input type="password" #password class="form-control" [(ngModel)]="store_info.password"  formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                </div>
+              </div>
+              <div *ngIf="unknown_user" class="invalid-feedback col-md-12 mb-1 mt-1 ml-3 d-block">
+                <div style="font-size: 14px">Unknown User</div>
+              </div>
+              <div class="form-group">
+                <label class="custom-control custom-checkbox m-0">
+                  <input type="checkbox" class="custom-control-input">
+                  <span class="custom-control-label" style="display: -webkit-box; font-size: 13px; font-weight: 500">Remember me</span>
+                </label>
+              </div>
+              <div class="form-row" style="float: right">
+                <div class="form-group col">
+                  <button type="button" class="btn btn-default" previousStep>Previous</button>&nbsp;
+                  <button type="button" class="btn btn-primary" (click)="login()">Login</button>
+                </div>
+              </div><br>
+              <div class="form-row" style="display: initial; text-align: center">
+                <div class="form-group col" >
+                  <label class="form-label" style="width: 100%">Don't have an account yet? <a style="color: #7792e4">Sign up</a></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </wizard-step>
+      </wizard>
+    </form>
+
+  </div>
+</div>

@@ -1,0 +1,60 @@
+.orders-table {
+  td, th {
+    font-size: 15px;
+  }
+  th:first-of-type, td:first-of-type {
+    width: 50px!important;
+    position: relative;
+    div:first-of-type {
+      width: 20px;
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
+  }
+
+}
+.order-table-header {
+  font-weight: bold;
+}
+.payment-pending-row {
+  td:first-of-type a {
+    color: #007ace!important;
+  }
+}
+.payment-voided-row {
+  .order-id, .order-date, .order-customer, .order-total {
+    color: #de3618!important;
+  }
+  td:last-of-type {
+    text-decoration: line-through;
+  }
+ }
+.payment-pending {
+  background-color: #ffc58b!important;
+  span.ion {
+    color: #c05717!important;
+  }
+}
+.payment-voided {
+  background-color: #dfe3e8!important;
+  span.ion {
+    color: #919eab!important;
+  }
+}
+.fulfilled {
+  background-color: #7ebaff !important;
+  span.ion {
+    color: #FFFDDB !important;
+  }
+}
+.unfulfilled {
+  background-color: #ffea8a!important;
+  span.ion {
+    color: #8a6116!important;
+  }
+}

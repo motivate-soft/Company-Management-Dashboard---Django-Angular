@@ -1,0 +1,71 @@
+@import '../../../../vendor/libs/angular-2-dropdown-multiselect/angular-2-dropdown-multiselect.scss';
+@import '../../../../vendor/libs/ng-select/ng-select.scss';
+
+.detail-container {
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  flex-direction: row;
+
+  .detail-label, .detail-amount {
+    flex: 1;
+    -ms-flex: 1;
+    -webkit-flex: 1;
+    text-align: right;
+  }
+}
+.products-container {
+
+  .product-row {
+    border-bottom: 1px solid #eee;
+  }
+  .product-row:last-of-type {
+    border-bottom: 0 solid transparent;;
+  }
+  .product-row {
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  flex-direction: row;
+
+  .product-image {
+    flex: 3;
+    -ms-flex: 3;
+    -webkit-flex: 3;
+
+    img {
+      border-width: 1px !important;
+      border-radius: 2px !important;
+    }
+  }
+
+  .product-price-container {
+    flex: 2;
+    -ms-flex: 2;
+    -webkit-flex: 2;
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flex;
+
+    .price-amount, .product-price {
+      flex: 1;
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      input {
+        min-width: 60px!important;
+      }
+    }
+
+  }
+  .product-item-total, .price-row-remove {
+      display: flex;
+      display: -webkit-flex;
+      display: -ms-flex;
+    }
+    .product-item-total {
+      width: 90px;
+    }
+}
+
+}
+

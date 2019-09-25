@@ -1,0 +1,43 @@
+<form [formGroup]="addFrom">
+  <div class="modal-header px-4">
+    <span>
+      <strong>Invite</strong>
+      <span> a Team Membre</span>
+    </span>
+    <span class="ion ion-md-close" (click)="close()"></span>
+  </div>
+  <div class="modal-body">
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label class="form-label">Email</label>
+        <input type="email" #email class="form-control" formControlName="email" [(ngModel)]="new_member.email"
+               placeholder="Email@example.com" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
+      </div>
+
+      <div class="form-group col-12">
+        <label class="form-label">Permission</label>
+        <select #permission class="form-control" [(ngModel)]="new_member.permission"
+                formControlName="permission" [ngClass]="{ 'is-invalid': submitted && f.permission.errors }">
+          <option value="">--</option>
+          <option value="{{permission}}" *ngFor="let permission of permissions">{{permission}}</option>
+        </select>
+        <div *ngIf="submitted && f.permission.errors" class="invalid-feedback">
+          <div *ngIf="f.permission.errors.required">Permission is required</div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="dropdown-divider"></div>
+    <br>
+    <div class="form-row">
+      <div class="form-group col text-right">
+        <button type="button" class="btn btn-default mr-2" (click)="close()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onInvite()">Invite</button>
+      </div>
+    </div>
+  </div>
+</form>

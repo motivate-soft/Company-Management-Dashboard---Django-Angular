@@ -1,0 +1,171 @@
+<h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+  <div>Orders</div>
+  <a routerLink="/store/orders/create" class="btn btn-primary btn-round d-block">
+    <span class="ion ion-md-add"></span>
+    Create Order
+  </a>
+</h4>
+<!-- Filters -->
+<div class="ui-bordered px-4 pt-4 mb-4">
+  <div class="form-row">
+    <!--<div class="col-md mb-4">-->
+      <!--<label class="form-label pb-1">Sales <span class="text-muted font-weight-normal ml-2">{{filterSales[0]}} - {{filterSales[1]}}</span></label>-->
+      <!--<nouislider-->
+        <!--[connect]="true"-->
+        <!--[config]="filterSalesOptions"-->
+        <!--[(ngModel)]="filterSales"-->
+        <!--class="product-list-slider my-3 mx-2">-->
+      <!--</nouislider>-->
+    <!--</div>-->
+    <!--<div class="col-md mb-4">-->
+      <!--<label class="form-label pb-1">Price <span class="text-muted font-weight-normal ml-2">{{formatPrice(filterPrice[0], true)}} - {{formatPrice(filterPrice[1], true)}}</span></label>-->
+      <!--<nouislider-->
+        <!--[connect]="true"-->
+        <!--[config]="filterPriceOptions"-->
+        <!--[(ngModel)]="filterPrice"-->
+        <!--class="product-list-slider my-3 mx-2">-->
+      <!--</nouislider>-->
+    <!--</div>-->
+    <div class="col-md mb-4">
+      <label class="form-label">Status</label>
+      <select class="custom-select" [(ngModel)]="filterStatus">
+        <option *ngFor="let status of ['Any', 'Published', 'Out of stock', 'Pending', 'Hidden']">{{status}}</option>
+      </select>
+    </div>
+    <div class="col-md col-xl-2 mb-4">
+      <label class="form-label d-none d-md-block">&nbsp;</label>
+      <button type="button" class="btn btn-secondary btn-block">Show</button>
+    </div>
+  </div>
+</div>
+<!-- / Filters -->
+
+<div class="card">
+
+  <!-- Table controls -->
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col">
+        Per page: &nbsp;
+        <select
+          [(ngModel)]="perPage"
+          (change)="update()"
+          class="custom-select custom-select-sm d-inline-block w-auto">
+          <option *ngFor="let limit of [10, 20, 30, 40, 50]">{{limit}}</option>
+        </select>
+      </div>
+      <div class="col">
+        <input type="text"
+          [(ngModel)]="filterVal"
+          (input)="currentPage = 1; update()"
+          class="form-control form-control-sm d-inline-block w-auto float-sm-right"
+          placeholder="Search...">
+      </div>
+    </div>
+
+  </div>
+  <!-- / Table controls -->
+
+  <!-- Table -->
+  <hr class="border-light m-0">
+  <div class="table-responsive">
+    <table class="table table-striped card-table orders-table">
+      <thead>
+        <tr>
+          <th class="text-nowrap cursor-pointer" (click)="selectAllOrders()">
+            <div class="form-group m-auto">
+                <label class="custom-control custom-checkbox m-0">
+                  <input type="checkbox" class="custom-control-input" [ngModel]="selectAll" [checked]="selectAll">
+                  <span class="custom-control-label" style="display: -webkit-box; font-size: 13px; font-weight: 500"></span>
+                </label>
+              </div>
+          </th>
+          <th class="text-nowrap cursor-pointer order-table-header" (click)="setSort('order')">
+            Order<i class="ion text-muted ml-2" *ngIf="sortBy=='order'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+          </th>
+          <th class="text-nowrap cursor-pointer order-table-header" (click)="setSort('date')">
+            Date<i class="ion text-muted ml-2" *ngIf="sortBy=='date'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+          </th>
+          <th class="text-nowrap cursor-pointer order-table-header" (click)="setSort('customer')">
+            Customer<i class="ion text-muted ml-2" *ngIf="sortBy=='customer'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+          </th>
+          <th class="text-nowrap cursor-pointer order-table-header" (click)="setSort('payment')">
+            Payment<i class="ion text-muted ml-2" *ngIf="sortBy=='payment'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+          </th>
+          <th class="text-nowrap cursor-pointer order-table-header" (click)="setSort('fulfillment')">
+            Fulfillment<i class="ion text-muted ml-2" *ngIf="sortBy=='fulfillment'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+          </th>
+          <th class="text-nowrap cursor-pointer text-right order-table-header" (click)="setSort('total')">
+            Total<i class="ion text-muted ml-2" *ngIf="sortBy=='total'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+          </th>
+          <th class="text-nowrap cursor-pointer text-center order-table-header">
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td class="align-middle py-2">
+            <div class="form-group m-auto">
+                <label class="custom-control custom-checkbox m-0">
+                  <input type="checkbox" class="custom-control-input" [ngModel]="order.selected" [checked]="order.selected">
+                  <span class="custom-control-label" style="display: -webkit-box; font-size: 13px; font-weight: 500"></span>
+                </label>
+              </div>
+          </td>
+          <td class="align-middle py-2">
+            <a href="javascript:void(0)" class="media-body text-dark d-block order-id">#{{order.id}}</a>
+          </td>
+          <td class="align-middle py-2 order-date">{{order.updated_at}}</td>
+          <td class="align-middle py-2 order-customer">{{order.customer_info.email}}</td>
+          <td class="align-middle py-2">
+            <span [ngClass]="order.payment === 0 ? 'payment-pending' : (order.payment === 1 ? 'payment-voided' : '')"
+                  class="badge badge-pill pr-3 pl-2">
+              <span class="ion" [ngClass]="order.payment === 0 ? 'ion-md-radio-button-off' : (order.payment === 1 ? 'ion-md-radio-button-on' : '')"></span>
+              {{order.payment === 0 ? 'Pending' : 'Voided'}}
+            </span>
+          </td>
+          <td class="align-middle py-2">
+            <span class="badge badge-pill pr-3 pl-2"
+                  [ngClass]="order.fulfillment === 1 ? 'fulfilled' : (order.fulfillment == 0 ? 'unfulfilled' : '')">
+              <span class="ion" [ngClass]="order.fulfillment === 1 ? 'ion-md-radio-button-off' : (order.fulfillment === 0 ? 'ion-md-radio-button-on' : '')"></span>
+              {{order.fulfillment === 0 ? 'Fulfilled' : 'Unfulfilled'}}
+            </span>
+          </td>
+          <td class="align-middle py-2 text-right order-total">{{order.total_price}}</td>
+          <td class="align-middle text-right">
+            <a routerLink="/store/orders/{{order.id}}/edit" class="btn btn-info btn-xs icon-btn md-btn-flat mr-1" ngbTooltip="Edit">
+              <span class="ion ion-md-create"></span>
+            </a>
+            <a href="javascript:void(0);" class="btn btn-danger btn-xs icon-btn md-btn-flat" (click)="deleteOrder(order.id)" ngbTooltip="Delete">
+              <span class="ion ion-md-trash"></span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- / Table -->
+
+  <!-- Pagination -->
+  <div class="card-body py-0">
+
+    <div class="row">
+      <div class="col-sm text-sm-left text-center pt-3">
+        <span class="text-muted" *ngIf="totalItems">Page {{ currentPage }} of {{ totalPages }}</span>
+      </div>
+      <div class="col-sm pt-3">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [pageSize]="perPage"
+          [(page)]="currentPage"
+          (pageChange)="update()"
+          size="sm"
+          class="d-flex justify-content-center justify-content-sm-end m-0"></ngb-pagination>
+      </div>
+    </div>
+
+  </div>
+  <!-- / Pagination -->
+</div>

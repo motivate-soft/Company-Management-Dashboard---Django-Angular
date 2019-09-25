@@ -1,0 +1,14 @@
+<ng-select [items]="customers"
+  bindLabel="email"
+  bindValue="id"
+  [(ngModel)]="selectedCustomerID"
+  (ngModelChange)="selectCustomer()"
+  placeholder="Search Customers">
+  <ng-template ng-label-tmp let-item="item">
+    <span class="ng-value-label">{{item['email']}}</span>
+  </ng-template>
+
+  <ng-template ng-option-tmp let-item="item">
+    <span class="ng-value-label">{{item['email']}}</span>
+  </ng-template>
+</ng-select>

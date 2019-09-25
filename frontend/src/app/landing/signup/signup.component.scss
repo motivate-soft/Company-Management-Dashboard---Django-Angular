@@ -1,0 +1,38 @@
+.signup {
+  background: #eee;
+  padding: 30px;
+  height: 100vh;
+  &__back {
+
+    i {
+      font-weight: bold;
+      font-size: 30px;
+      color: #1ab394;
+    }
+  }
+
+  &__container {
+    padding: 10vh;
+
+    &__card {
+      margin: auto;
+      width: 500px;
+      padding: 20px;
+      i {
+        font-weight: bold;
+        font-size: 80px;
+        color: #1ab394;
+      }
+    }
+  }
+
+}
+
+.logo {
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  background: #1ab394;
+  border-radius: 5px;
+  color: white;
+}

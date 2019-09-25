@@ -1,0 +1,19 @@
+@import '../../../assets/landing/bootstrap.css';
+@import '../../../assets/landing/animate.css';
+//@import '../../../assets/landing/font-awesome.css';
+@import '../../../assets/landing/style.css';
+
+.modal-dialog{
+  width: 500px;
+}
+.form-group{
+  margin: 15px 30px 15px 30px;
+}
+.logo {
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  background: #1ab394;
+  border-radius: 5px;
+  color: white;
+}

@@ -1,0 +1,23 @@
+<sidenav [orientation]="orientation" [ngClass]="getClasses()">
+
+  <div class="sidenav-inner" [ngClass]="{ 'py-1': orientation !== 'horizontal' }">
+    <sidenav-block class="my-1">
+      <div style="text-align: center; margin-top: 40px; margin-bottom: 20px">
+        <img src="assets/img/avatars/1-small.png" class="d-block ui-w-50 rounded-circle" style="margin: auto" alt="">
+        <div class="media-body">
+          <h5 class="sidenav-text mb-1">Mike Greene</h5>
+          <div class="small"><a href="javascript:void(0)" class="sidenav-link">company <i class="ion ion-md-arrow-dropdown"></i> </a></div>
+        </div>
+      </div>
+    </sidenav-block>
+    <sidenav-divider class="mt-0"></sidenav-divider>
+
+    <sidenav-router-link icon="ion ion-md-speedometer" route="/store/dashboard" [active]="isActive('/store/dashboard')">Dashboard</sidenav-router-link>
+    <sidenav-router-link icon="ion ion-ios-mail" badge="{{orderAmount}}" badgeClass="badge-warning" route="/store/orders" [active]="isActive('/store/orders')">Orders</sidenav-router-link>
+    <sidenav-router-link icon="ion ion-ios-stats" route="/store/products" [active]="isActive('/store/products')">Products</sidenav-router-link>
+    <sidenav-router-link icon="ion ion-ios-people" route="/store/customers" [active]="isActive('/store/customers')">Customers</sidenav-router-link>
+    <sidenav-router-link icon="ion ion-ios-settings" route="/store/settings" [active]="isActive('/store/setting')">Settings</sidenav-router-link>
+    <sidenav-router-link icon="ion ion-ios-star" badge="new" badgeClass="badge-primary"  route="/store/features" [active]="isActive('/store/features')">Features</sidenav-router-link>
+
+  </div>
+</sidenav>

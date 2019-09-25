@@ -1,0 +1,11 @@
+<div class="form-group">
+  <input type="text" class="form-control w-100" (click)="open(searchModal, { windowClass: 'modal-default modal-lg animate' })">
+</div>
+
+<ng-template #searchModal let-c="close" let-d="dismiss">
+  <app-list-modal
+    (closeForm)="close(c)"
+    (createForm)="createProduct($event, c)"
+  >
+  </app-list-modal>
+</ng-template>

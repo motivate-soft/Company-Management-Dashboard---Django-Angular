@@ -1,0 +1,58 @@
+.member-item {
+  @media(min-width: 1440px) {
+    width: 25%!important;
+    float: left;
+  }
+  .card-header {
+    min-height: 171px!important;
+  }
+  .card-body {
+    height: 85px;
+  }
+}
+.setting-container {
+  display: flex;
+  flex-direction: column;
+  .setting-body {
+    flex: 1;
+  }
+}
+.member-row-div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.member-row-info {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-left: 5px;
+  @media (min-width: 1200px) {
+    font-size: 14px;
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    font-size: 13px;
+  }
+  @media (max-width: 767px) {
+    font-size: 14px;
+  }
+}
+
+.member-photo {
+  max-width: 50%;
+  margin: auto;
+  img {
+    width: 100%;
+  }
+}
+.add-member-photo {
+  max-width: 50%;
+  margin: auto;
+  padding: 10%;
+  background-color: #afafaf;
+  border-radius: 50%;
+  img {
+    width: 100%;
+  }
+}

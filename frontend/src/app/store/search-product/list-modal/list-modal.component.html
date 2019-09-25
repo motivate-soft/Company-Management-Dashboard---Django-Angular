@@ -1,0 +1,49 @@
+<div>
+  <div class="modal-header">
+    <h5 class="modal-title">
+      Select Products
+    </h5>
+    <button type="button" class="close" (click)="close()">&times;</button>
+  </div>
+  <div class="modal-body products">
+    <div class="form-group">
+      <input type="text" [(ngModel)]="arg" (ngModelChange)="searchProducts()" class="form-control w-100" autofocus>
+    </div>
+    <table class="table table-striped table-bordered card-table" style="text-align: center">
+      <thead>
+        <th></th>
+        <th class="align-middle py-2" >Product</th>
+        <th class="align-middle py-2" >Variation</th>
+        <th class="align-middle py-2" >Sku</th>
+        <th class="align-middle py-2" >Price</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let variation of variations">
+          <td>
+            <label class="custom-control custom-checkbox">
+            <input type="checkbox" [(ngModel)]="variation.select" (ngModelChange)="addVariation(variation)" class="custom-control-input">
+            <span class="custom-control-label"></span>
+          </label>
+          </td>
+          <td class="align-middle py-2" style="min-width: 300px">
+            <div class="media align-items-center">
+              <img class="d-block ui-w-40" [src]="(variation.image ? 'statics/image/' + variation.image : 'assets/img/avatars/noimage.png')" alt="">
+              <a href="javascript:void(0)" class="media-body d-block text-dark ml-3">{{variation.product.name}}</a>
+            </div>
+          </td>
+          <td class="align-middle py-2">{{variation.title}}</td>
+          <td class="align-middle py-2">{{variation.sku}}</td>
+          <td class="align-middle py-2">{{variation.price}}$</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <div class="form-row">
+      <div class="form-group col">
+        <button type="button" class="btn btn-primary" style="float: right; margin-left: 5px" (click)="submit()">Save</button>
+        <button type="button" class="btn btn-default" style="float: right" (click)="close()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

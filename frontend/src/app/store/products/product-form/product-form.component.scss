@@ -1,0 +1,35 @@
+@import '../../../../vendor/libs/ngx-chips/ngx-chips.scss';
+
+:host /deep/ {
+  .ng2-file-upload-drop-zone {
+    height: 100px;
+    border: 3px dashed rgba(24, 28, 33, 0.1);
+  }
+  .ng2-file-upload-file-over {
+    border-color: rgba(24, 28, 33, 0.3);
+  }
+}
+.p-create {
+  max-width: 800px;
+  padding: 50px;
+}
+
+.dz-message {
+  height: 0px;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 5px;
+  border: #1ab394 solid 1px;
+}
+
+.variation {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 20px;
+  border-radius: 5px;
+  border: #1ab394 solid 1px;
+}
+
